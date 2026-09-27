@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #0b0710;
+    color: white;
+    overflow-x: hidden;
+}
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    position: relative;
+}
+.container {
+    max-width: 850px;
+    width: 100%;
+}
+h1 {
+    font-size: clamp(42px, 10vw, 85px);
+    margin-bottom: 20px;
+}
+h2 {
+    font-size: clamp(30px, 7vw, 55px);
+    margin-bottom: 25px;
+}
+p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #e9dfe9;
+}
+/* Opening */
+#opening {
+    background:
+        radial-gradient(circle at center, #35152d 0%, #0b0710 60%);
+}
+.small {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 13px;
+    color: #d9a9c5;
+    margin-bottom: 20px;
+}
+button {
+    border: none;
+    padding: 15px 32px;
+    border-radius: 50px;
+    background: #e8a7c6;
+    color: #210d18;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.3s;
+}
+button:hover {
+    transform: scale(1.07);
+}
+/* Hearts */
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 20px;
+    animation: float 7s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+}
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+    }
+}
+/* Story */
+#story {
+    background: linear-gradient(#0b0710, #160d18);
+}
+.card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 25px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+}
+/* Gallery */
+#gallery {
+    background: #0d0910;
+}
+
+/* Romantic Polaroid Gallery */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 40px;
+    padding: 10px;
+}
+
+.polaroid {
+    width: 260px;
+    background: #fffaf5;
+    padding: 12px 12px 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    opacity: 0;
+    transform: translateY(50px) rotate(-5deg);
+}
+
+.polaroid:nth-child(even) {
+    transform: translateY(50px) rotate(5deg);
+}
+
+.polaroid.show {
+    opacity: 1;
+    transform: translateY(0) rotate(-4deg);
+}
+
+.polaroid:nth-child(even).show {
+    transform: translateY(0) rotate(4deg);
+}
+
+.polaroid:hover {
+    transform: translateY(-10px) rotate(0deg) scale(1.04) !important;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+}
+
+.polaroid img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+}
+
+.caption {
+    color: #3a2630;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .polaroid {
+        width: 85%;
+        max-width: 300px;
+    }
+
+    .polaroid img {
+        height: 300px;
+    }
+}
+.gallery img:hover {
+    transform: scale(1.03);
+}
+/* Reasons */
+.reasons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+.reason {
+    padding: 25px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+/* Letter */
+#letter {
+    background:
+        radial-gradient(circle at center, #32162c, #0b0710 70%);
+}
+.envelope {
+    background: #f1d6df;
+    color: #321522;
+    padding: 35px;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: auto;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.envelope:hover {
+    transform: translateY(-5px);
+}
+.letter-content {
+    display: none;
+    margin-top: 25px;
+    text-align: left;
+    line-height: 1.9;
+    color: #321522;
+}
+
+.letter-content p {
+    color:  #321522;
+}
+/* Final */
+#final {
+    background:
+        radial-gradient(circle, #4b1838 0%, #0b0710 65%);
+}
+.final-heart {
+    font-size: 80px;
+    animation: beat 1.2s infinite;
+}
+@keyframes beat {
+    0%,100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.18);
+    }
+}
+.signature {
+    margin-top: 30px;
+    font-size: 20px;
+    color: #e8a7c6;
+}
+/* Mobile */
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+    .gallery img {
+        height: 300px;
+    }
+    .reasons {
+        grid-template-columns: 1fr;
+    }
+    p {
+        font-size: 17px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- OPENING -->
+<section id="opening">
+<div class="container">
+<div class="small">A little something for you</div>
+<h1>Hey, Birthday Girl ❤️</h1>
+<p>
+I could have simply wished you happy birthday...
+<br>
+but you deserve something a something creative as Shayan always do.
+</p>
+<button onclick="startExperience()">
+Open Your Surprise ✨
+</button>
+</div>
+</section>
+<!-- STORY -->
+<section id="story">
+<div class="container">
+<div class="small">Our little story</div>
+<h2>It started with you...</h2>
+<div class="card">
+<p>
+Some people enter your life quietly,
+and somehow become your favourite part of it.
+</p>
+</div>
+<div class="card">
+<p>
+I don't know what the future has planned,
+but I'm grateful that you are part of my present.
+</p>
+</div>
+<div class="card">
+<p>
+And honestly...
+I wouldn't replace our memories for anything.
+❤️
+</p>
+</div>
+</div>
+</section>
+<!-- GALLERY -->
+<section id="gallery">
+<div class="container">
+<div class="small">Our memories</div>
+<h2>Some of my favourite moments 📸</h2>
+<div class="gallery">
+
+    <div class="polaroid">
+        <img src="photos/photo1.jpeg" alt="Memory 1">
+        <div class="caption">One of my favourite memories ❤️</div>
+    </div>
+
+    <div class="polaroid">
+        <img src="photos/photo2.jpeg" alt="Memory 2">
+        <div class="caption">You make ordinary moments special ✨</div>
+    </div>
+
+    <div class="polaroid">
+        <img src="photos/photo3.jpeg" alt="Memory 3">
+        <div class="caption">That smile... 🥹</div>
+    </div>
+
+    <div class="polaroid">
+        <img src="photos/photo4.jpeg" alt="Memory 4">
+        <div class="caption">A moment worth remembering 🤍</div>
+    </div>
+
+    <div class="polaroid">
+        <img src="photos/photo5.jpeg" alt="Memory 5">
+        <div class="caption">Us. That's my favourite part. ❤️</div>
+    </div>
+
+    <div class="polaroid">
+        <img src="photos/photo6.jpeg" alt="Memory 6">
+        <div class="caption">And many more to come... ♾️</div>
+    </div>
+
+</div>
+</div>
+</section>
+<!-- REASONS -->
+<section>
+<div class="container">
+<div class="small">Just a few reasons</div>
+<h2>Why you're special ❤️</h2>
+<div class="reasons">
+<div class="reason">
+<h3>Your smile</h3>
+<p>You somehow make everything feel lighter.</p>
+</div>
+<div class="reason">
+<h3>Your heart</h3>
+<p>The way you care about people is beautiful.</p>
+</div>
+<div class="reason">
+<h3>Your craziness</h3>
+<p>Life would definitely be more boring without it.</p>
+</div>
+<div class="reason">
+<h3>Simply you</h3>
+<p>Because there is nobody quite like you.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- LETTER -->
+<section id="letter">
+<div class="container">
+<div class="small">Something from my heart</div>
+<h2>A letter for you 💌</h2>
+<div class="envelope" onclick="openLetter()">
+<h3>💌 Tap to open</h3>
+<div class="letter-content" id="letterText">
+<p>
+My love,
+</p>
+<br>
+<p>
+Happy Birthday Khushi ❤️
+</p>
+<br>
+<p>
+I hope you know how special you are to me.
+Thank you for all the little moments,
+the laughs, the conversations,
+and everything in between.
+</p>
+<br>
+<p>
+I hope this new year of your life brings
+you happiness, peace, success and
+everything you've been wishing for.
+</p>
+<br>
+<p>
+And I hope I get to be there for many
+more birthdays with you.
+</p>
+<br>
+<p>
+Happy Birthday, Meri jaan.
+❤️
+</p>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL -->
+<section id="final">
+<div class="container">
+<div class="final-heart">❤️</div>
+<div class="small">One last thing...</div>
+<h1>Happy Birthday!</h1>
+<h2>My Favourite Person 🎂</h2>
+<p>
+May your smile stay forever,
+your dreams become reality,
+and your heart always stay happy.
+</p>
+<div class="signature">
+With love,<br>
+<strong>Shayan ❤️</strong>
+</div>
+</div>
+</section>
+<script>
+function startExperience() {
+
+    const music = document.getElementById("birthdayMusic");
+
+    music.play();
+
+    document.getElementById("story").scrollIntoView({
+        behavior: "smooth"
+    });
+
+    createHearts();
+}
+
+const polaroids = document.querySelectorAll(".polaroid");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+
+    });
+
+}, {
+    threshold: 0.2
+});
+
+polaroids.forEach(polaroid => {
+    observer.observe(polaroid);
+});
+function openLetter() {
+    const letter = document.getElementById("letterText");
+    if (letter.style.display === "block") {
+        letter.style.display = "none";
+    } else {
+        letter.style.display = "block";
+    }
+}
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = ["❤️","💗","💕","✨"][Math.floor(Math.random()*4)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (5 + Math.random()*5) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => {
+            heart.remove();
+        }, 10000);
+    }, 500);
+}
+</script>
+
+<audio id="birthdayMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+</body>
+</html>
